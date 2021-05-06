@@ -1,15 +1,33 @@
-;
-'use strict'
-const express = require('express');
-let api = express.Router()
+const express = require("express"),
+  postulationController = require("../controllers/postulation.controller"),
+  authenticate = require("../middlewares/authenticate");
 
-const postulationController = require('../controllers/postulation.controller');
-const authenticate = require('../middlewares/authenticate')
+let api = express.Router();
 
-api.get('/getPostulationById/:id', [authenticate.tokenAuth], postulationController.getPostulationById)
-api.get('/getPostulations', [authenticate.tokenAuth], postulationController.getPostulations)
-api.post('/postPostulation', [authenticate.tokenAuth], postulationController.postPostulation)
-api.put('/putPostulation/:id', [authenticate.tokenAuth], postulationController.putPostulation)
-api.delete('/deletePostulation/:id', [authenticate.tokenAuth], postulationController.deletePostulation)
+api.get(
+  "/getPostulationById/:id",
+  [authenticate.tokenAuth],
+  postulationController.getPostulationById
+);
+api.get(
+  "/getPostulations",
+  [authenticate.tokenAuth],
+  postulationController.getPostulations
+);
+api.post(
+  "/postPostulation",
+  [authenticate.tokenAuth],
+  postulationController.postPostulation
+);
+api.put(
+  "/putPostulation/:id",
+  [authenticate.tokenAuth],
+  postulationController.putPostulation
+);
+api.delete(
+  "/deletePostulation/:id",
+  [authenticate.tokenAuth],
+  postulationController.deletePostulation
+);
 
 module.exports = api;

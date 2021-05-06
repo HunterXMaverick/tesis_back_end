@@ -11,9 +11,14 @@ let uploadFile = (req, res) => {
   let { directory } = req.params,
     { file } = req.files,
     pathName = `./assets`;
-    console.log(req.files)
+
   if (!fs.existsSync(pathName)) {
     fs.mkdirSync(pathName);
+    pathName = `./assets/${directory}`;
+    if (!fs.existsSync(pathName)) {
+      fs.mkdirSync(pathName);
+    }
+  } else {
     pathName = `./assets/${directory}`;
     if (!fs.existsSync(pathName)) {
       fs.mkdirSync(pathName);
@@ -29,16 +34,16 @@ let uploadFile = (req, res) => {
       return res.status(200).json({
         ok: true,
         data: file.name,
-        msm: "Uploaded file",
+        info: "Uploaded file",
       });
     });
+  } else {
+    return res.status(400).json({
+      ok: false,
+      data: null,
+      info: "Mimetype not supported",
+    });
   }
-
-  return res.status(400).json({
-    ok: false,
-    data: null,
-    msm: "Mimetype not supported",
-  });
 };
 
 /**
@@ -56,7 +61,7 @@ let showFile = (req, res) => {
       : res.status(400).json({
           ok: false,
           data: null,
-          msm: "The file doesn't exist",
+          info: "The file doesn't exist",
         });
   });
 };
@@ -76,12 +81,12 @@ let deleteFile = (req, res) => {
       ? res.status(200).json({
           ok: true,
           data: null,
-          msm: "File deleted",
+          info: "File deleted",
         })
       : res.status(400).json({
           ok: false,
           data: null,
-          msm: "The file doesn't exist",
+          info: "The file doesn't exist",
         });
   });
 };
@@ -109,7 +114,7 @@ let modifyFile = (req, res) => {
           return res.status(200).json({
             ok: true,
             data: file.name,
-            msm: "Modified file",
+            info: "Modified file",
           });
         });
       }
@@ -117,7 +122,7 @@ let modifyFile = (req, res) => {
       res.status(400).json({
         ok: false,
         data: null,
-        msm: "The file doesn't exist",
+        info: "The file doesn't exist",
       });
     }
   });

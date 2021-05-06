@@ -1,14 +1,11 @@
-;
-'use strict'
-
-const env = require('dotenv').config()
-const app = require('./app')
-const port = process.env.PORT || 3000
+const env = require("dotenv").config(),
+  app = require("./app"),
+  port = process.env.PORT || 3000;
 
 app.listen(port, (err) => {
-    if (!err) {
-        console.log(`Server running on port: ${port}`)
-    } else {
-        console.log(`Server doesn't work`)
-    }
-})
+  if (!err) {
+    console.log(`Server running on port: ${port}`);
+  } else {
+    console.error(`Server doesn't work`);
+  }
+});

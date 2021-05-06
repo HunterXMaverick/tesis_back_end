@@ -1,101 +1,122 @@
-;
-'use strict'
-const Postulation = require('../models/Postulation')
+const Postulation = require("../models/Postulation");
 
 let getPostulationById = async (req, res) => {
-    let id = req.params.id
-    let postulation = await Postulation.findById({_id: id})
-    if (postulation) {
-        res.status(200).json({
-            ok: true,
-            postulation
-        })
-    } else if (postulation.length === 0) {
-        res.send('La postulación no está registrada en el sistema')
-    } else {
-        res.status(500).json({
-            ok: false,
-            data: null
-        })
-    }
-}
+  let { id } = req.params,
+    postulation = await Postulation.findById({ _id: id });
+
+  if (postulation) {
+    return res.status(200).json({
+      ok: true,
+      data: postulation,
+      info: "",
+    });
+  } else if (postulation.length === 0) {
+    return res.status(404).json({
+      ok: false,
+      data: null,
+      info: "La postulación no está registrada en el sistema",
+    });
+  } else {
+    return res.status(500).json({
+      ok: false,
+      data: null,
+      info: "Server error",
+    });
+  }
+};
 
 let getPostulations = async (req, res) => {
-    let postulations = await Postulation.find()
-    if (postulations) {
-        res.status(200).json({
-            ok: true,
-            postulations,
-            sms: `Postulaciones registradas: ${postulations.length}`
-        })
-    } else if (postulations.length === 0) {
-        res.send('No hay ningún congreso registrado')
-    } else {
-        res.status(500).json({
-            ok: false,
-            data: null
-        })
-    }
-}
+  let postulations = await Postulation.find();
+
+  if (postulations) {
+    return res.status(200).json({
+      ok: true,
+      data: postulations,
+      info: `Postulaciones registradas: ${postulations.length}`,
+    });
+  } else if (postulations.length === 0) {
+    return res.status(404).json({
+      ok: true,
+      data: postulations,
+      info: `No hay ningún congreso registrado`,
+    });
+  } else {
+    return res.status(500).json({
+      ok: false,
+      data: null,
+      info: "Server error",
+    });
+  }
+};
 
 let postPostulation = async (req, res) => {
-    let postulation = req.body.postulation
-    let newPostulation = new Postulation(postulation)
-    await newPostulation.save()
-        .then(() => {
-            res.status(200).json({
-                ok: true,
-                newPostulation,
-                sms: 'Postulación almacenada'
-            })
-        })
-        .catch(err => {
-            res.status(500).json({
-                ok: false,
-                data: null,
-                sms: `El error es: ${err}`
-            })
-        })
-}
+  let { postulation } = req.body,
+    newPostulation = new Postulation(postulation);
+
+  await newPostulation
+    .save()
+    .then(() => {
+      return res.status(200).json({
+        ok: true,
+        data: newPostulation,
+        info: "Postulación almacenada",
+      });
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        ok: false,
+        data: null,
+        info: `El error es: ${error}`,
+      });
+    });
+};
 
 let putPostulation = async (req, res) => {
-    let id = req.params.id
-    let postulation = req.body.postulation;
-    let updatePostulation = await Postulation.updateOne({_id: id}, {$set: postulation})
-    if (updatePostulation) {
-        res.status(200).json({
-            ok: true,
-            postulation,
-            sms: 'Postulación actualizada'
-        })
-    } else {
-        res.status(500).json({
-            ok: false,
-            data: null
-        })
-    }
-}
+  let { id } = req.params,
+    { postulation } = req.body,
+    updatePostulation = await Postulation.updateOne(
+      { _id: id },
+      { $set: postulation }
+    );
+
+  if (updatePostulation) {
+    return res.status(200).json({
+      ok: true,
+      data: postulation,
+      info: "Postulación actualizada",
+    });
+  } else {
+    return res.status(500).json({
+      ok: false,
+      data: null,
+      info: "Server error",
+    });
+  }
+};
 
 let deletePostulation = async (req, res) => {
-    let id = req.params.id
-    let deletePostulation = await Postulation.deleteOne({_id: id})
-    if (deletePostulation) {
-        res.status(200).json({
-            ok: true,
-            sms: 'Postulación eliminada'
-        })
-    } else {
-        res.status(500).json({
-            ok: false,
-            data: null
-        })
-    }
-}
+  let { id } = req.params,
+    deletePostulation = await Postulation.deleteOne({ _id: id });
+
+  if (deletePostulation) {
+    return res.status(200).json({
+      ok: true,
+      data: null,
+      info: "Postulación eliminada",
+    });
+  } else {
+    return res.status(500).json({
+      ok: false,
+      data: null,
+      info: "Server error",
+    });
+  }
+};
 
 module.exports = {
-    getPostulationById,
-    getPostulations,
-    postPostulation,
-    putPostulation,
-    deletePostulation
-}
+  getPostulationById,
+  getPostulations,
+  postPostulation,
+  putPostulation,
+  deletePostulation,
+};
