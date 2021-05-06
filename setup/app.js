@@ -1,4 +1,5 @@
 const express = require("express"),
+  fileUpload = require("express-fileupload"),
   passport = require("passport"),
   cors = require("cors");
 
@@ -43,6 +44,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(fileUpload());
 
 /**
  * CORS
