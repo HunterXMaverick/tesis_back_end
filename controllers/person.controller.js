@@ -29,7 +29,7 @@ let getPersonById = async (req, res) => {
 
 let getPersonByEmail = async (req, res) => {
   let { email } = req.params,
-    person = await Person.findOne({ email: email });
+    person = await Person.findOne({ email });
 
   if (person) {
     return res.status(200).json({
@@ -41,7 +41,7 @@ let getPersonByEmail = async (req, res) => {
     res.status(404).json({
       ok: false,
       data: null,
-      sms: "Correo no registrado en el sistema",
+      info: "Correo no registrado en el sistema",
     });
   }
 };
