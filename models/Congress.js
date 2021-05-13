@@ -13,7 +13,7 @@ const Congress = new Schema({
   politics: { type: String },
   capacity_speakers: { type: Number },
   capacity_participants: { type: Number },
-  knowledge_area: { type: Array },
+  knowledge_area: { type: String },
   status_congress: { type: Boolean },
 });
 
