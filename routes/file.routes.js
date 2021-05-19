@@ -4,11 +4,7 @@ const express = require("express"),
 
 let api = express.Router();
 
-api.get(
-  "/file/:directory/:urlFile",
-  [authenticate.tokenAuth],
-  fileController.showFile
-);
+api.get("/file/:directory/:urlFile", fileController.showFile);
 api.post(
   "/file/upload/:directory",
   [authenticate.tokenAuth],
