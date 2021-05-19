@@ -33,7 +33,7 @@ let uploadFile = (req, res) => {
 
       return res.status(200).json({
         ok: true,
-        data: file.name,
+        data: { directory, name: file.name },
         info: "Uploaded file",
       });
     });
