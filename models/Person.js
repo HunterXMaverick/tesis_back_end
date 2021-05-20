@@ -10,10 +10,11 @@ const Person = new Schema({
     type: String,
     enum: ["Masterado", "Tercer Nivel", "Segundo Nivel"],
   },
-  specialty: {
-    type: String,
-    enum: ["Medicina", "Economía", "Deportes", "Educacion"],
-  },
+  // specialty: {
+  //   type: String,
+  //   enum: ["Medicina", "Economía", "Deportes", "Educacion"],
+  // },
+  title : { type: String },
   type_dni: {
     type: String,
     enum: ["Cédula", "Pasaporte"],
