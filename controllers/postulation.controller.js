@@ -26,7 +26,9 @@ let getPostulationById = async (req, res) => {
 };
 
 let getPostulations = async (req, res) => {
-  let postulations = await Postulation.find();
+  let postulations = await Postulation.find().sort({
+    knowledge_area: 1,
+  });
 
   if (postulations) {
     return res.status(200).json({
