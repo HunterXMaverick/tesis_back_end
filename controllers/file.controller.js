@@ -3,7 +3,7 @@ const randomstring = require("randomstring"),
   path = require("path");
 
 /**
- * Función que carga la imagen desde el cliente al servidor.
+ * Función que carga archivos desde el cliente al servidor.
  * @param req request
  * @param res response
  */
@@ -25,8 +25,32 @@ let uploadFile = (req, res) => {
     }
   }
 
-  if (file.mimetype == "application/pdf") {
-    file.name = `${randomstring.generate(10)}.pdf`;
+  if (
+    file.mimetype == "application/pdf" ||
+    file.mimetype == "image/png" ||
+    file.mimetype == "image/jpg" ||
+    file.mimetype == "image/jpeg"
+  ) {
+    switch (file.mimetype) {
+      case "application/pdf":
+        file.name = `${randomstring.generate(10)}.pdf`;
+        break;
+
+      case "image/png":
+        file.name = `${randomstring.generate(10)}.png`;
+        break;
+
+      case "image/jpg":
+        file.name = `${randomstring.generate(10)}.jpg`;
+        break;
+
+      case "image/jpeg":
+        file.name = `${randomstring.generate(10)}.jpeg`;
+        break;
+
+      default:
+        break;
+    }
 
     file.mv(`./assets/${directory}/${file.name}`, (err) => {
       if (err) return res.status(500).send({ message: err });
