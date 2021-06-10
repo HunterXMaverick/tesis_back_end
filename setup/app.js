@@ -14,7 +14,8 @@ let congressRoutes = require("../routes/congress.routes"),
   personRoutes = require("../routes/person.routes"),
   postulationRoutes = require("../routes/postulation.routes"),
   linksRoutes = require("../routes/links.routes"),
-  fileRoutes = require("../routes/file.routes");
+  fileRoutes = require("../routes/file.routes"),
+  rubricRoutes = require("../routes/rubric.routes");
 
 let session = require("express-session"),
   sess = {
@@ -70,5 +71,6 @@ app.use("/api", personRoutes);
 app.use("/api", postulationRoutes);
 app.use("/api", linksRoutes);
 app.use("/api", fileRoutes);
+app.use("/api", rubricRoutes);
 
 module.exports = app;
