@@ -24,6 +24,31 @@ let getRubrics = async (req, res) => {
   }
 };
 
+let getRubricById = async (req, res) => {
+  let { id } = req.params,
+    rubric = await Rubric.findById({ _id: id });
+
+  if (rubric) {
+    return res.status(200).json({
+      ok: true,
+      data: rubric,
+      info: "",
+    });
+  } else if (rubric.length === 0) {
+    return res.status(404).json({
+      ok: true,
+      data: null,
+      info: "La rúbrica no está registrado en el sistema",
+    });
+  } else {
+    return res.status(500).json({
+      ok: false,
+      data: null,
+      info: "",
+    });
+  }
+};
+
 let postRubric = async (req, res) => {
   let { rubric } = req.body,
     newRubric = new Rubric(rubric);
@@ -68,6 +93,7 @@ let putRubric = async (req, res) => {
 
 module.exports = {
   getRubrics,
+  getRubricById,
   postRubric,
   putRubric,
 };
