@@ -6,7 +6,7 @@ const rubricController = require("../controllers/rubric.controller"),
 
 api.get("/getRubrics", [authenticate.tokenAuth], rubricController.getRubrics);
 api.get(
-  "/getRubricById",
+  "/getRubricById/:id",
   [authenticate.tokenAuth],
   rubricController.getRubricById
 );
