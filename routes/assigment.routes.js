@@ -9,20 +9,22 @@ api.get(
   [authenticate.tokenAuth],
   assigmentController.getAssigments
 );
-api.get(
-  "/getAssigmentsByReviewer/:reviewer_id",
-  [authenticate.tokenAuth],
-  assigmentController.getAssigmentsByReviewer
-);
+// api.get(
+//   "/getAssigmentsByReviewer/:reviewer_id",
+//   [authenticate.tokenAuth],
+//   assigmentController.getAssigmentsByReviewer
+// );
+
 api.post(
   "/postAssigment",
   [authenticate.tokenAuth],
   assigmentController.postAssigment
 );
-api.put(
-  "/putAssigment/:id",
+
+api.delete(
+  "/deleteAssigment/:id",
   [authenticate.tokenAuth],
-  assigmentController.putAssigment
+  assigmentController.deleteAssigment
 );
 
 module.exports = api;
