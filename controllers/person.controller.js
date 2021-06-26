@@ -46,6 +46,30 @@ let getPersonByEmail = async (req, res) => {
   }
 };
 
+let getReviewers = async (req, res) => {
+  let person = await Person.find({ rol: "Revisor" });
+
+  if (person) {
+    return res.status(200).json({
+      ok: true,
+      data: person,
+      info: "",
+    });
+  } else if (person.length === 0) {
+    return res.status(404).json({
+      ok: true,
+      data: null,
+      info: `No existen usuarios con el rol de REVISOR.`,
+    });
+  } else {
+    return res.status(500).json({
+      ok: false,
+      data: null,
+      info: "",
+    });
+  }
+};
+
 let getPersons = async (req, res) => {
   let persons = await Person.find();
 
@@ -173,6 +197,7 @@ let login = async (req, res) => {
 module.exports = {
   getPersonById,
   getPersonByEmail,
+  getReviewers,
   getPersons,
   postPerson,
   putPerson,
