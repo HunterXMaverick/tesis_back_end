@@ -115,10 +115,29 @@ let deletePostulation = async (req, res) => {
   }
 };
 
+
+let disableSpeaker = async (req, res) => {
+  let id = req.params.id
+  let person = req.body
+  let disableSpeaker = await Postulation.updateOne({ _id: id }, { $set: { status: person.status } })
+  if (disableSpeaker) {
+      res.status(200).json({
+          ok: true,
+          sms: 'Ponente Aceptado'
+      })
+  } else {
+      res.status(500).json({
+          ok: false,
+          data: null
+      })
+  }
+};
+
 module.exports = {
   getPostulationById,
   getPostulations,
   postPostulation,
   putPostulation,
   deletePostulation,
+  disableSpeaker
 };
