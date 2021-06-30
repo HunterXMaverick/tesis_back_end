@@ -2,7 +2,7 @@ const mongoose = require("mongoose"),
   { Schema } = mongoose;
 
 const Assignment = new Schema({
-  reviewer_data: { type: Object },
+  reviewer_name: { type: String },
   knowledge_area: { type: String },
 });
 
