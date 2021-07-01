@@ -29,5 +29,10 @@ api.delete(
   [authenticate.tokenAuth],
   postulationController.deletePostulation
 );
+api.put(
+  "/disableSpeaker/:id",
+  [authenticate.tokenAuth],
+  postulationController.disableSpeaker
+);
 
 module.exports = api;

@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 let tokenAuth = (req, res, next) => {
   let token = req.headers.authorization || null;
+
   jwt.verify(token, process.env.KEY_JWT, (error, decode) => {
     if (error) {
       return res.status(400).json({
@@ -10,8 +11,14 @@ let tokenAuth = (req, res, next) => {
         info: "Token inválido",
       });
     } else {
+      let token = jwt.sign({ data: decode.data }, process.env.KEY_JWT, {
+        algorithm: "HS256",
+        expiresIn: 300,
+      });
+
       req.decode = decode;
-      //   console.log(decode);
+      req.token = token;
+
       next();
     }
   });
@@ -19,7 +26,8 @@ let tokenAuth = (req, res, next) => {
 
 let emailAuth = (req, res, next) => {
   let person = req.body.person;
-  let path = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+  let path =
+    /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
   let validate = path.test(person.email);
   if (validate) {
     next();

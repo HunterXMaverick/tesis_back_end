@@ -11,6 +11,7 @@ let getPersonById = async (req, res) => {
       ok: true,
       data: person,
       info: "",
+      token: req.token,
     });
   } else if (person.length === 0) {
     return res.status(404).json({
@@ -36,6 +37,7 @@ let getPersonByEmail = async (req, res) => {
       ok: true,
       data: person,
       info: "",
+      token: req.token,
     });
   } else {
     res.status(404).json({
@@ -54,6 +56,7 @@ let getReviewers = async (req, res) => {
       ok: true,
       data: person,
       info: "",
+      token: req.token,
     });
   } else if (person.length === 0) {
     return res.status(404).json({
@@ -78,6 +81,7 @@ let getPersons = async (req, res) => {
       ok: true,
       data: persons,
       info: "",
+      token: req.token,
     });
   } else if (persons.length === 0) {
     return res.status(404).json({
@@ -126,6 +130,7 @@ let putPerson = async (req, res) => {
       ok: true,
       data: person,
       info: "Usuario actualizado",
+      token: req.token,
     });
   } else {
     return res.status(500).json({
@@ -166,12 +171,21 @@ let login = async (req, res) => {
   let { person } = req.body,
     personLog = await Person.find({ email: person.email, rol: person.rol });
 
-  if (personLog.length > 0) {
+  if (personLog.length == 1) {
     if (bcrypt.compareSync(person.password, personLog[0].password)) {
-      let token = jwt.sign(person, process.env.KEY_JWT, {
+      let userData = {
+        _id: personLog[0]._id,
+        email: personLog[0].email,
+        last_names: personLog[0].last_names,
+        names: personLog[0].names,
+        rol: personLog[0].rol,
+      };
+
+      let token = jwt.sign(userData, process.env.KEY_JWT, {
         algorithm: "HS256",
         expiresIn: parseInt(process.env.TIME),
       });
+
       return res.status(200).json({
         ok: true,
         data: person,
