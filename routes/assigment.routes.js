@@ -9,11 +9,12 @@ api.get(
   [authenticate.tokenAuth],
   assigmentController.getAssigments
 );
-// api.get(
-//   "/getAssigmentsByReviewer/:reviewer_id",
-//   [authenticate.tokenAuth],
-//   assigmentController.getAssigmentsByReviewer
-// );
+
+api.get(
+  "/getAssigmentsByReviewer/:reviewer_name",
+  [authenticate.tokenAuth],
+  assigmentController.getAssigmentsByReviewer
+);
 
 api.post(
   "/postAssigment",

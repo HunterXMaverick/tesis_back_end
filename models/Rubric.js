@@ -4,7 +4,6 @@ const mongoose = require("mongoose"),
 const Rubric = new Schema({
   qualificationCriteria: { type: Array },
   ratingRange: { type: String },
-  reviewersRating: { type: Number },
 });
 
 module.exports = mongoose.model("rubric", Rubric);

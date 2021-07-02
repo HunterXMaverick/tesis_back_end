@@ -18,24 +18,24 @@ let getAssigments = async (req, res) => {
   }
 };
 
-// let getAssigmentsByReviewer = async (req, res) => {
-//   let { reviewer_id } = await req.params,
-//     assigments = await Assigment.find({ reviewer_id });
+let getAssigmentsByReviewer = async (req, res) => {
+  let { reviewer_name } = await req.params,
+    assigments = await Assigment.find({ reviewer_name });
 
-//   if (assigments) {
-//     return res.status(200).json({
-//       ok: true,
-//       data: assigments,
-//       info: `Postulaciones que calificará el usuario con ID: ${reviewer_id}`,
-//     });
-//   } else {
-//     return res.status(500).json({
-//       ok: false,
-//       data: null,
-//       info: "Server error",
-//     });
-//   }
-// };
+  if (assigments) {
+    return res.status(200).json({
+      ok: true,
+      data: assigments,
+      info: `Postulaciones que calificará el usuario con ID: ${reviewer_name}`,
+    });
+  } else {
+    return res.status(500).json({
+      ok: false,
+      data: null,
+      info: "Server error",
+    });
+  }
+};
 
 let postAssigment = async (req, res) => {
   let { assigment } = req.body,
@@ -80,7 +80,7 @@ let deleteAssigment = async (req, res) => {
 
 module.exports = {
   getAssigments,
-  // getAssigmentsByReviewer,
+  getAssigmentsByReviewer,
   postAssigment,
   deleteAssigment,
 };

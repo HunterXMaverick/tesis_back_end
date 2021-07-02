@@ -133,11 +133,31 @@ let disableSpeaker = async (req, res) => {
   }
 };
 
+let getPostulationknowledgeArea = async (req, res) => {
+  let { knowledge_area } = await req.params,
+  postulation = await Postulation.find({ knowledge_area });
+
+  if (postulation) {
+    return res.status(200).json({
+      ok: true,
+      data: postulation,
+      info: `Area De Conocimiento: ${knowledge_area}`,
+    });
+  } else {
+    return res.status(500).json({
+      ok: false,
+      data: null,
+      info: "Server error",
+    });
+  }
+};
+
 module.exports = {
   getPostulationById,
   getPostulations,
   postPostulation,
   putPostulation,
   deletePostulation,
-  disableSpeaker
+  disableSpeaker,
+  getPostulationknowledgeArea,
 };
