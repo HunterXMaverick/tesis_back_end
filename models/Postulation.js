@@ -9,7 +9,8 @@ const Postulation = new Schema({
   files: { type: String },
   presentation_date: { type: Date },
   person_id: { type: String },
-  status: { type: Boolean }
+  status: { type: Boolean },
+  status_quelification: { type: Boolean },
 });
 
 module.exports = mongoose.model("postulations", Postulation);

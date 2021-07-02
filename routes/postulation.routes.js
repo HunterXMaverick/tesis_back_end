@@ -5,6 +5,11 @@ const express = require("express"),
 let api = express.Router();
 
 api.get(
+  "/knowledgeByArea/:knowledge_area",
+  [authenticate.tokenAuth],
+  postulationController.getPostulationknowledgeArea
+);
+api.get(
   "/getPostulationById/:id",
   [authenticate.tokenAuth],
   postulationController.getPostulationById
