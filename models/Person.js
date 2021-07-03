@@ -19,7 +19,7 @@ const Person = new Schema({
     type: String,
     enum: ["Cédula", "Pasaporte"],
   },
-  dni: { type: String },
+  dni: { type: String, unique: true, index: true },
   profile_picture: { type: String },
   names: { type: String },
   last_names: { type: String },
