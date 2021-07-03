@@ -115,27 +115,32 @@ let deletePostulation = async (req, res) => {
   }
 };
 
-
 let disableSpeaker = async (req, res) => {
-  let id = req.params.id
-  let person = req.body
-  let disableSpeaker = await Postulation.updateOne({ _id: id }, { $set: { status: person.status } })
+  let { id } = req.params,
+    { postulation } = req.body,
+    disableSpeaker = await Postulation.updateOne(
+      { _id: id },
+      { $set: { status: postulation } }
+    );
+
   if (disableSpeaker) {
-      res.status(200).json({
-          ok: true,
-          sms: 'Ponente Aceptado'
-      })
+    res.status(200).json({
+      ok: true,
+      data: null,
+      info: "Ponente Aceptado",
+    });
   } else {
-      res.status(500).json({
-          ok: false,
-          data: null
-      })
+    res.status(500).json({
+      ok: false,
+      data: null,
+      info: "Server error",
+    });
   }
 };
 
 let getPostulationknowledgeArea = async (req, res) => {
   let { knowledge_area } = await req.params,
-  postulation = await Postulation.find({ knowledge_area });
+    postulation = await Postulation.find({ knowledge_area });
 
   if (postulation) {
     return res.status(200).json({
