@@ -18,6 +18,7 @@ let congressRoutes = require("../routes/congress.routes"),
   rubricRoutes = require("../routes/rubric.routes"),
   assigmentRoutes = require("../routes/assigment.routes"),
   qualificationRoutes = require("../routes/qualification.routes");
+  participationRouter = require("../routes/participations.routes");
 
 let session = require("express-session"),
   sess = {
