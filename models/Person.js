@@ -4,7 +4,7 @@ const mongoose = require("mongoose"),
 const Person = new Schema({
   rol: {
     type: String,
-    enum: ["Administrador", "Organizador", "Revisor", "Ponente", "Asistente"],
+    enum: ["Administrador", "Organizador", "Revisor", "Ponente", "Participante"],
   },
   level_academy: {
     type: String,
