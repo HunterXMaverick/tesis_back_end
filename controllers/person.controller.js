@@ -179,6 +179,9 @@ let login = async (req, res) => {
         last_names: personLog[0].last_names,
         names: personLog[0].names,
         rol: personLog[0].rol,
+        profile_picture: personLog[0].profile_picture
+          ? personLog[0].profile_picture
+          : null,
       };
 
       let token = jwt.sign(userData, process.env.KEY_JWT, {
