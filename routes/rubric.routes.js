@@ -12,5 +12,10 @@ api.get(
 );
 api.post("/postRubric", [authenticate.tokenAuth], rubricController.postRubric);
 api.put("/putRubric/:id", [authenticate.tokenAuth], rubricController.putRubric);
+api.delete(
+  "/rubric/:id",
+  [authenticate.tokenAuth],
+  rubricController.deleteRubric
+);
 
 module.exports = api;

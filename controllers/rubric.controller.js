@@ -91,9 +91,29 @@ let putRubric = async (req, res) => {
   }
 };
 
+let deleteRubric = async (req, res) => {
+  let { id } = req.params,
+    deleteRubric = await Rubric.deleteOne({ _id: id });
+
+  if (deleteRubric) {
+    return res.status(200).json({
+      ok: true,
+      data: null,
+      info: "Rúbrica eliminada",
+    });
+  } else {
+    return res.status(500).json({
+      ok: false,
+      data: null,
+      info: "Server error",
+    });
+  }
+};
+
 module.exports = {
   getRubrics,
   getRubricById,
   postRubric,
   putRubric,
+  deleteRubric,
 };
