@@ -9,7 +9,6 @@ const Postulation = new Schema({
   files: { type: String },
   presentation_date: { type: Date },
   person_id: { type: String },
-  status: { type: String },
   status: {
     type: String,
     enum: ["Pendiente", "Aprobado", "Reprobado"],
