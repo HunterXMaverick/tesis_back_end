@@ -10,6 +10,10 @@ const Postulation = new Schema({
   presentation_date: { type: Date },
   person_id: { type: String },
   status: { type: String },
+  status: {
+    type: String,
+    enum: ["Pendiente", "Aprobado", "Reprobado"],
+  },
   status_quelification: { type: Boolean },
 });
 
