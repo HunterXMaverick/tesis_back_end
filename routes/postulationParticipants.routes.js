@@ -4,13 +4,13 @@ const express = require("express"),
 const postulationPasticipantsController = require("../controllers/postulationPasticipants.controller"),
   authenticate = require("../middlewares/authenticate");
 
-api.get("/getPostulationPasticipantsController", [authenticate.tokenAuth], postulationPasticipantsController.getPostulationParticipantss);
+api.get("/getPostulationParticipantsController", [authenticate.tokenAuth], postulationPasticipantsController.getPostulationParticipantss);
 api.get(
-  "/getPostulationPasticipantsById/:id",
+  "/getPostulationParticipantsById/:id",
   [authenticate.tokenAuth],
   postulationPasticipantsController.getPostulationParticipantsById
 );
-api.post("/postPostulationPasticipantsn", [authenticate.tokenAuth], postulationPasticipantsController.postPostulationParticipants);
-api.put("/putPostulationPasticipantsn/:id", [authenticate.tokenAuth], postulationPasticipantsController.putPostulationParticipants);
+api.post("/postPostulationParticipants", [authenticate.tokenAuth], postulationPasticipantsController.postPostulationParticipants);
+api.put("/putPostulationParticipants/:id", [authenticate.tokenAuth], postulationPasticipantsController.putPostulationParticipants);
 
 module.exports = api;
