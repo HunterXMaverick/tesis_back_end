@@ -40,7 +40,7 @@ let getPostulations = async (req, res) => {
     return res.status(404).json({
       ok: true,
       data: postulations,
-      info: `No hay ningún congreso registrado`,
+      info: `No hay ningúna postulación registrado`,
     });
   } else {
     return res.status(500).json({
