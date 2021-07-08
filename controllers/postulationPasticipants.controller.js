@@ -2,7 +2,9 @@ const PostulationParticipants = require("../models/PostulationParticipants");
 
 let getPostulationParticipantsById = async (req, res) => {
   let { id } = req.params,
-    PostulationParticipants = await PostulationParticipants.findById({ _id: id });
+    PostulationParticipants = await PostulationParticipants.findById({
+      _id: id,
+    });
 
   if (PostulationParticipants) {
     return res.status(200).json({
@@ -11,6 +13,33 @@ let getPostulationParticipantsById = async (req, res) => {
       info: "",
     });
   } else if (PostulationParticipants.length === 0) {
+    return res.status(404).json({
+      ok: false,
+      data: null,
+      info: "La postulación-participante no está registrada en el sistema",
+    });
+  } else {
+    return res.status(500).json({
+      ok: false,
+      data: null,
+      info: "Server error",
+    });
+  }
+};
+
+let getParticipantPostulationsLength = async (req, res) => {
+  let { id } = await req.params,
+    postulationParticipants = await PostulationParticipants.find({
+      person_id: id,
+    });
+
+  if (postulationParticipants) {
+    return res.status(200).json({
+      ok: true,
+      data: postulationParticipants,
+      info: "",
+    });
+  } else if (postulationParticipants.length === 0) {
     return res.status(404).json({
       ok: false,
       data: null,
@@ -52,8 +81,10 @@ let getPostulationParticipantss = async (req, res) => {
 };
 
 let postPostulationParticipants = async (req, res) => {
-  let { PostulationParticipants } = req.body,
-    newPostulationParticipants = new PostulationParticipants(PostulationParticipants);
+  let { postulationParticipants } = req.body,
+    newPostulationParticipants = new PostulationParticipants(
+      postulationParticipants
+    );
 
   await newPostulationParticipants
     .save()
@@ -98,7 +129,9 @@ let putPostulationParticipants = async (req, res) => {
 
 let deletePostulationParticipants = async (req, res) => {
   let { id } = req.params,
-    deletePostulationParticipants = await PostulationParticipants.deleteOne({ _id: id });
+    deletePostulationParticipants = await PostulationParticipants.deleteOne({
+      _id: id,
+    });
 
   if (deletePostulationParticipants) {
     return res.status(200).json({
@@ -115,11 +148,11 @@ let deletePostulationParticipants = async (req, res) => {
   }
 };
 
-
 module.exports = {
   getPostulationParticipantsById,
   getPostulationParticipantss,
   postPostulationParticipants,
   putPostulationParticipants,
   deletePostulationParticipants,
+  getParticipantPostulationsLength,
 };
