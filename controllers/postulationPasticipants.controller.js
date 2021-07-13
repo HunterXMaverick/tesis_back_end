@@ -106,16 +106,16 @@ let postPostulationParticipants = async (req, res) => {
 
 let putPostulationParticipants = async (req, res) => {
   let { id } = req.params,
-    { PostulationParticipants } = req.body,
+    { postulationParticipants } = req.body,
     updatePostulationParticipants = await PostulationParticipants.updateOne(
       { _id: id },
-      { $set: PostulationParticipants }
+      { $set: postulationParticipants }
     );
 
   if (updatePostulationParticipants) {
     return res.status(200).json({
       ok: true,
-      data: PostulationParticipants,
+      data: updatePostulationParticipants,
       info: "Postulación actualizada",
     });
   } else {
