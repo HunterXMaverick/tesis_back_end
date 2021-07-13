@@ -7,7 +7,7 @@ const Postulation = new Schema({
   summary_pdf: { type: String },
   knowledge_area: { type: String },
   files: { type: String },
-  presentation_date: { type: Date },
+  // presentation_date: { type: Date },
   person_id: { type: String },
   status: {
     type: String,

@@ -3,7 +3,7 @@ const mongoose = require("mongoose"),
 
 const Rubric = new Schema({
   qualificationCriteria: { type: Array },
-  ratingRange: { type: String },
+  // ratingRange: { type: String },
 });
 
 module.exports = mongoose.model("rubric", Rubric);
