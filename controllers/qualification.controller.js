@@ -26,19 +26,13 @@ let getQualifications = async (req, res) => {
 
 let getQualificationById = async (req, res) => {
   let { id } = req.params,
-  qualification = await Qualification.findById({ _id: id });
+  qualification = await Qualification.find({ postulation_id: id });
 
   if (qualification) {
     return res.status(200).json({
       ok: true,
       data: qualification,
       info: "",
-    });
-  } else if (qualification.length === 0) {
-    return res.status(404).json({
-      ok: true,
-      data: null,
-      info: "La calificación no está registrado en el sistema",
     });
   } else {
     return res.status(500).json({
