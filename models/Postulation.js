@@ -14,6 +14,7 @@ const Postulation = new Schema({
     enum: ["Pendiente", "Aprobado", "Reprobado"],
   },
   status_quelification: { type: Boolean },
+  congress_id: { type: String },
 });
 
 module.exports = mongoose.model("postulations", Postulation);

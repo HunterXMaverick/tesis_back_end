@@ -8,6 +8,7 @@ const PostulationParticipants = new Schema({
     type: String,
     enum: ["Pendiente", "Aceptado", "Rechazado"],
   },
+  congress_id: { type: String },
 });
 
 module.exports = mongoose.model(
