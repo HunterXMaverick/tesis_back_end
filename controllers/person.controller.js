@@ -172,34 +172,42 @@ let login = async (req, res) => {
     personLog = await Person.find({ email: person.email, rol: person.rol });
 
   if (personLog.length == 1) {
-    if (bcrypt.compareSync(person.password, personLog[0].password)) {
-      let userData = {
-        _id: personLog[0]._id,
-        email: personLog[0].email,
-        last_names: personLog[0].last_names,
-        names: personLog[0].names,
-        rol: personLog[0].rol,
-        profile_picture: personLog[0].profile_picture
-          ? personLog[0].profile_picture
-          : null,
-      };
+    if (personLog[0].status) {
+      if (bcrypt.compareSync(person.password, personLog[0].password)) {
+        let userData = {
+          _id: personLog[0]._id,
+          email: personLog[0].email,
+          last_names: personLog[0].last_names,
+          names: personLog[0].names,
+          rol: personLog[0].rol,
+          profile_picture: personLog[0].profile_picture
+            ? personLog[0].profile_picture
+            : null,
+        };
 
-      let token = jwt.sign(userData, process.env.KEY_JWT, {
-        algorithm: "HS256",
-        expiresIn: parseInt(process.env.TIME),
-      });
+        let token = jwt.sign(userData, process.env.KEY_JWT, {
+          algorithm: "HS256",
+          expiresIn: parseInt(process.env.TIME),
+        });
 
-      return res.status(200).json({
-        ok: true,
-        data: person,
-        info: "Usuario encontrado",
-        token,
-      });
+        return res.status(200).json({
+          ok: true,
+          data: person,
+          info: "Usuario encontrado",
+          token,
+        });
+      } else {
+        return res.status(401).json({
+          ok: false,
+          data: null,
+          info: "Contraseña incorrecta",
+        });
+      }
     } else {
       return res.status(401).json({
         ok: false,
         data: null,
-        info: "Contraseña incorrecta",
+        info: "Usuario deshabilitado",
       });
     }
   } else {
