@@ -64,10 +64,37 @@ let putCongress = async (req, res) => {
       info: "Server error",
     });
   }
+}
+
+//CHECK
+let disableCongress = async (req, res) => {
+  let { id } = req.params,
+    congress = req.body,
+    disableCongress = await Congress.updateOne(
+      { _id: id },
+      { $set: { status_congress: congress.status_congress } }
+    );
+
+  console.log(congress);
+
+  if (disableCongress) {
+    return res.status(200).json({
+      ok: true,
+      data: null,
+      info: "Usuario actualizado",
+    });
+  } else {
+    return res.status(500).json({
+      ok: false,
+      data: null,
+      info: "Server error",
+    });
+  }
 };
 
 module.exports = {
   getCongress,
   postCongress,
   putCongress,
+  disableCongress
 };

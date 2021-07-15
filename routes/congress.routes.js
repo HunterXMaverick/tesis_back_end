@@ -20,4 +20,10 @@ api.put(
   congressController.putCongress
 );
 
+api.put(
+  "/disableCongress/:id",
+  [authenticate.tokenAuth],
+  congressController.disableCongress
+);
+
 module.exports = api;
