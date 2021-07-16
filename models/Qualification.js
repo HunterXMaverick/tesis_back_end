@@ -7,6 +7,7 @@ const Qualification = new Schema({
   qualificaty: { type: Number },
   remark: { type: Array },
   person_id: { type: String },
+  congress_id: { type: String },
 });
 
 module.exports = mongoose.model("qualifications", Qualification);

@@ -33,6 +33,7 @@ const Person = new Schema({
   email: { type: String },
   password: { type: String },
   status: { type: Boolean },
+  congress_id: { type: String },
 });
 
 module.exports = mongoose.model("persons", Person);

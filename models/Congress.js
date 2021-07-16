@@ -14,7 +14,11 @@ const Congress = new Schema({
   capacity_speakers: { type: Number },
   capacity_participants: { type: Number },
   knowledge_area: { type: String },
-  status_congress: { type: Boolean },
+  status_congress: {
+    type: String,
+    enum: ["Pendiente", "Habilitado", "Inhabilitado"],
+  },
+  person_id: { type: String },
 });
 
 module.exports = mongoose.model("congresses", Congress);
