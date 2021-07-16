@@ -18,6 +18,7 @@ const Congress = new Schema({
     type: String,
     enum: ["Pendiente", "Habilitado", "Inhabilitado"],
   },
+  person_id: { type: String },
 });
 
 module.exports = mongoose.model("congresses", Congress);
