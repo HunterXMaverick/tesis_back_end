@@ -25,5 +25,6 @@ api.put(
   [authenticate.tokenAuth],
   congressController.disableCongress
 );
+api.get("/getCongressById/:id", congressController.getCongressById);
 
 module.exports = api;

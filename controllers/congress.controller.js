@@ -1,5 +1,30 @@
 const Congress = require("../models/Congress");
 
+let getCongressById = async (req, res) => {
+  let { id } = req.params,
+    { congress } = await Congress.findById({ _id: id });
+
+  if (link) {
+    return res.status(200).json({
+      ok: true,
+      data: congress,
+      info: "",
+    });
+  } else if (congress.length === 0) {
+    return res.status(404).json({
+      ok: false,
+      data: congress,
+      info: "El enlace no existe en el sistema",
+    });
+  } else {
+    return res.status(500).json({
+      ok: false,
+      data: null,
+      info: "Server error",
+    });
+  }
+};
+
 let getCongress = async (req, res) => {
   let congress = await Congress.find();
 
@@ -81,7 +106,7 @@ let disableCongress = async (req, res) => {
     return res.status(200).json({
       ok: true,
       data: null,
-      info: "Usuario actualizado",
+      info: "Congreso actualizado",
     });
   } else {
     return res.status(500).json({
@@ -96,5 +121,6 @@ module.exports = {
   getCongress,
   postCongress,
   putCongress,
-  disableCongress
+  disableCongress,
+  getCongressById
 };
