@@ -6,7 +6,7 @@ let api = express.Router();
 
 api.get(
   "/getCongress",
-  [authenticate.tokenAuth],
+  // [authenticate.tokenAuth],
   congressController.getCongress
 );
 api.post(
