@@ -21,7 +21,11 @@ api.post(
 );
 api.post("/login", personController.login);
 
-api.put("/putPerson/:id", [authenticate.tokenAuth], personController.putPerson);
+api.put(
+  "/putPerson/:id",
+  [authenticate.tokenAuth, encodings.encodePassword],
+  personController.putPerson
+);
 api.put(
   "/disablePerson/:id",
   [authenticate.tokenAuth],
