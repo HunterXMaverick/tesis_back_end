@@ -2,21 +2,15 @@ const Congress = require("../models/Congress");
 
 let getCongressById = async (req, res) => {
   let { id } = req.params,
-    { congress } = await Congress.findById({ _id: id });
+     congress  = await Congress.findById({_id:id});
 
-  if (link) {
+  if (congress) {
     return res.status(200).json({
       ok: true,
       data: congress,
       info: "",
     });
-  } else if (congress.length === 0) {
-    return res.status(404).json({
-      ok: false,
-      data: congress,
-      info: "El enlace no existe en el sistema",
-    });
-  } else {
+  }else {
     return res.status(500).json({
       ok: false,
       data: null,
