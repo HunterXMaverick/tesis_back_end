@@ -1,0 +1,33 @@
+# Extension: REST Client
+### SignIn
+POST http://localhost:3500/api/login
+Content-Type: application/json
+
+{
+    "person": {
+        "email": "organizador@gmail.com",
+        "password": "1234",
+        "rol": "Organizador"
+    }
+}
+
+### List of congresses
+GET http://localhost:3500/api/getCongress
+
+### Create a congress
+POST http://localhost:3500/api/postCongress
+Content-Type: application/json
+
+{
+    "name": "New Congress Test"
+}
+
+### Get congress by ID
+GET http://localhost:3500/api/getCongressById/1
+
+### List of conferences
+GET http://localhost:3500/api/getConference
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGQxNDBhOWFjMDkxOTM5MThmZjZkMzciLCJlbWFpbCI6Im9yZ2FuaXphZG9yQGdtYWlsLmNvbSIsImxhc3RfbmFtZXMiOiJQZXJsYXphIFphbWJyYW5vIiwibmFtZXMiOiJKb2hhbyBOaWNvbGFzIiwicm9sIjoiT3JnYW5pemFkb3IiLCJwcm9maWxlX3BpY3R1cmUiOiJpbWFnZXMvZU9RN1JNSTMzWC5qcGVnIiwiaWF0IjoxNjI3NjEwMTQ5LCJleHAiOjE2Mjc2MTM3NDl9.dxyZz_Ut-WULFs919z-Kftbq9uE75AYvwRq5VU4-eCc
+
+### Get File
+GET http://localhost:3500/api/file/images/not-found.png
