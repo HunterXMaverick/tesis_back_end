@@ -26,6 +26,13 @@ api.put(
   [authenticate.tokenAuth, encodings.encodePassword],
   personController.putPerson
 );
+
+api.put(
+  "/putPersonNoPass/:id",
+  [authenticate.tokenAuth],
+  personController.putPerson
+);
+
 api.put(
   "/disablePerson/:id",
   [authenticate.tokenAuth],
